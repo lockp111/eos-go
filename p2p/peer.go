@@ -19,8 +19,8 @@ import (
 
 	"bufio"
 
-	"github.com/eoscanada/eos-go"
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/lockp111/eos-go"
+	"github.com/lockp111/eos-go/ecc"
 )
 
 type Peer struct {

@@ -1,6 +1,6 @@
 package system
 
-import "github.com/eoscanada/eos-go"
+import "github.com/lockp111/eos-go"
 
 // NewNonce returns a `nonce` action that lives on the
 // `eosio.bios` contract. It should exist only when booting a new
