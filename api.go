@@ -596,7 +596,7 @@ func (api *API) call(baseAPI string, endpoint string, body interface{}, out inte
 	}
 	defer resp.Body.Close()
 
-	cnt := bytes.NewBuffer(make([]byte, 4e5))
+	cnt := bytes.NewBuffer(make([]byte, 0, 4e5))
 	_, err = io.Copy(cnt, resp.Body)
 	if err != nil {
 		return fmt.Errorf("Copy: %s", err)
