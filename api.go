@@ -569,7 +569,7 @@ func (api *API) call(baseAPI string, endpoint string, body interface{}, out inte
 	targetURL := fmt.Sprintf("%s/v1/%s/%s", api.BaseURL, baseAPI, endpoint)
 	req, err := http.NewRequest("POST", targetURL, jsonBody)
 	if err != nil {
-		return fmt.Errorf("NewRequest: %s", err)
+		return fmt.Errorf("NewRequest: %w", err)
 	}
 
 	for k, v := range api.Header {
@@ -592,14 +592,14 @@ func (api *API) call(baseAPI string, endpoint string, body interface{}, out inte
 
 	resp, err := api.HttpClient.Do(req)
 	if err != nil {
-		return fmt.Errorf("%s: %s", req.URL.String(), err)
+		return fmt.Errorf("%s: %w", req.URL.String(), err)
 	}
 	defer resp.Body.Close()
 
 	cnt := bytes.NewBuffer(make([]byte, 0, 4e5))
 	_, err = io.Copy(cnt, resp.Body)
 	if err != nil {
-		return fmt.Errorf("Copy: %s", err)
+		return fmt.Errorf("Copy: %w", err)
 	}
 
 	if resp.StatusCode == 404 {
@@ -639,7 +639,7 @@ func (api *API) call(baseAPI string, endpoint string, body interface{}, out inte
 	}
 
 	if err := json.Unmarshal(cnt.Bytes(), &out); err != nil {
-		return fmt.Errorf("Unmarshal: %s", err)
+		return fmt.Errorf("Unmarshal: %w", err)
 	}
 
 	return nil
